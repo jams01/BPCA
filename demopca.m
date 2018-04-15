@@ -2,9 +2,10 @@
 l=100;
 n=1000;
 shots=12;
+rank=8;
 
-A=randn(l,shots);
-B=rand(n,shots);
+A=randn(l,rank);
+B=rand(n,rank);
 F=A*B';
 %calculate and substract mean
 f=mean(F,2);
