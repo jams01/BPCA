@@ -6,8 +6,8 @@ function [bin_pca,rest]=designbinary_pca(num,Sigma,d)
 % the binary principal components of a covariance matrix
 % Sigma
 %
-% Copyright (2018): Jonathan Monsalve
-% Universidad Industrial de Santander (2018)
+% Copyright (2017): Jonathan Monsalve
+% Universidad Industrial de Santander (2017)
 % -----------------------------------------------------------------------
 %
 % designbinary_pca is distributed under the terms
@@ -29,15 +29,16 @@ function [bin_pca,rest]=designbinary_pca(num,Sigma,d)
 %
 %   num:        Number of binary vectors to be designed
 %   Sigma:      Covariance matrix
-%   d:          Transmitance of the output filters (example d=1/4 for 25%)
+%   d:          Transmitance of the output filters (
 %
 % 	===== Outputs =====
 %   bin_pca:    Matrix where each row is a binary PC.
-%   rest:       Represent what was deflated from the covariance maatrix.
-%   Such that Sigma-rest is th residual
 % ========================================================
 [L,~]=size(Sigma);
-
+% [W,e]=svds(Sigma,15);
+% e=15:-0.9:1;
+% e=e(1:15).^2;
+% Sigma=W*diag(e)*W';
 bin_pca=zeros(num,L);
 prior_list=zeros(1,L);
 to=0;
@@ -96,7 +97,7 @@ for k=1:num
     rest=rest+((Sigma*Q)+(Q*Sigma)-(Q*Sigma*Q));
     
     Sigma = Sigma-(Sigma*Q)-(Q*Sigma)+(Q*Sigma*Q);
-    if(temp/tr<1e-6) % if no enough variance is explaind finish
+    if(temp/tr<1e-6)
        bin_pca=bin_pca(1:k-1,:);
        break; 
     end

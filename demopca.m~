@@ -1,7 +1,7 @@
 %create a low rank signal
 l=100; %spectral bands
 n=1000; % pixels
-shots=20; %shots
+shots=15; %shots
 rank=8; %rank of the signal
 
 A=randn(l,rank);
@@ -33,5 +33,5 @@ pix=round(n*rand()); %pixel to be plotted
 plot(1:l,F(:,pix),'red',1:l,Fr(:,pix),'blue',1:l,Fd(:,pix),'black'),
 legend('Ground-truth','Random','Designed')
 
-fprintf('||F-Fd||_2=%f, ||F-Fr||_2=%f, SNR_Designed=%f, SNR_Random=%f\n',norm(F-Fd),norm(F-Fr),snr(F,F-Fd),snr(F,F-Fr));
+fprintf('||F-Fd||_2=%f, ||F-Fr||_2=%f, SNR_Designed=%f, SNR_Random=%f\n',norm(F-Fd),norm(F-Fr),snr(F,FFd));
 
